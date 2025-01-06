@@ -38,7 +38,7 @@
     <h3>In Depth Analysis of decrypt_flag Function</h3>
     <p>In order to find the flag, I first wanted to understand what was happening in decrypt_function. I decided to annotate the assembly code to the best of my understanding.</p><br>
     <img src="20250106_204109000_iOS.jpg" alt="Image 3" width="1546" height="1056">
-    <br><p>The biggest clue for me was knowing the string value of the encrypted flag and knowing how to decrypt it, simply XOR each equivalent hexadecimal byte with the value 0x2A. While the assembly code also tells me the decrypted flag is stored in rcx+19, after having a look in IDA I struggled to find it this way. I therefore decided to write a python script to complete the decryption process for me.</p><br>
+    <br><p>The biggest clue for me was knowing the string value of the encrypted flag and knowing how to decrypt it, simply XOR each equivalent hexadecimal byte with the value 0x2A. While the assembly code also tells me the decrypted flag is stored in rcx+19, after having a look in IDA I struggled to find it this way. I therefore decided to write a python script to complete the decryption process for me.</p>
     <h3>Final Decryption</h3>
     <img src="RE3.png" alt="Image 4" width="1132" height="235">
     <br><p>Above is my script, which gave the following output:</p><br>

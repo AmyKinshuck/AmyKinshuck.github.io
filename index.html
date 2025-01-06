@@ -29,16 +29,16 @@
     <p> I was given a hint to start my analysis by tracing backwards from the Entry Point (EP) and identify the function responsible for decryption.</p>
 
     <h3>Analysis</h3>
-    <img src="RE1.PNG" alt="Image 1" width="403" height="303">
+    <img src="RE1.png" alt="Image 1" width="403" height="303">
     <br><p> After opening the file in IDA, I noticed a functions section so decided to have a look through to see if any of the functions could be responsible for decryption. I found a function called decrypt_flag which I decided to investigate further.</p><br>
-    <img src="20250106_203811000_iOS.JPG" alt="Image 1" width="1180" height="745">
-    <img src="20250106_203922000_iOS.JPG" alt="Image 2" width="404" height="204">
+    <img src="20250106_203811000_iOS.jpg" alt="Image 1" width="1180" height="745">
+    <img src="20250106_203922000_iOS.jpg" alt="Image 2" width="404" height="204">
     <br><p>In order to find the flag, I first wanted to understand what was happening in decrypt_function. I decided to annotate the assembly code to the best of my understanding.</p><br>
-    <img src="20250106_204109000_iOS.JPG" alt="Image 3" width="1546" height="1056">
+    <img src="20250106_204109000_iOS.jpg" alt="Image 3" width="1546" height="1056">
     <br><p>The biggest clue for me was knowing the string value of the encrypted flag and knowing how to decrypt it, simply XOR each equivalent hexadecimal byte with the value 0x2A. While the assembly code also tells me the decrypted flag is stored in rcx+19, after having a look in IDA I struggled to find it this way. I therefore decided to write a python script to complete the decryption process for me.</p><br>
-    <img src="RE3.PNG" alt="Image 4" width="1132" height="235">
+    <img src="RE3.png" alt="Image 4" width="1132" height="235">
     <br><p>Above is my script, which gave the following output:</p><br>
-    <img src="RE4.PNG" alt="Image 4" width="505" height="148">
+    <img src="RE4.png" alt="Image 4" width="505" height="148">
     <br><p>This reveals that the final decrypted flag is <b>flag{hidden_in_xor_sight}</b></p><br>
 
 

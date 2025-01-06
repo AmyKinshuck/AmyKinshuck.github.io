@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My First Page !</title>
+    <title>Proton Drive Reverse Engineering Challenge</title>
     <style>
         table {
             border-collapse: collapse; /* Ensures borders are merged */
@@ -20,68 +20,28 @@
     </style>
 </head>
 <body>
-    <h1>My First Page</h1>
-    <h2>Ready for some blogging?</h2>
-    <h3>I know I am</h3>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <b>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</b><br><br>
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.<br><br>
-
-    <a href=https://www.linkedin.com/in/amy-kinshuck" target="_blank">Here's a link to my LinkedIn, check me out!</a>
-    <br>
-    <br>
-    <img src="CATS.JPG" alt="My Cats" width="403" height="303">
-
-    <br>
-    <h2>Things I like include:</h2>
+    <h3>Task Instructions and Prior Information</h3>
     <ul>
-        <li>Cats
-            <ol>
-                <li>Mimi</li>
-                <li>Cookie</li>
-            </ol>
-        </li>
-        <li>Cats</li>
-        <li>More Cats</li>
-        <li>MORE CATS</li>
+        <li> Download a file containing a 64-bit Windows Portable Executable (PE) written in C through <a href="https://drive.proton.me/urls/9YFMD8JVE8#blLxCshN7OeS" target="_blank">this link</a> </li>
+        <li> The flag is in the format flag{}</li>
     </ul>
+    <p> I was given a hint to start my analysis by tracing backwards from the Entry Point (EP) and identify the function responsible for decryption.</p>
 
-    <h3>How many times has each of my cats woken me up this week?</h3>
-    <br>
-    <table>
-        <tr>
-            <th>CAT</th>
-            <th>Mon</th>
-            <th>Tues</th>
-            <th>Weds</th>
-            <th>Thurs</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-        </tr>
-        <tr>
-            <td>Mimi</td>
-            <td>1</td>
-            <td>1</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>Cookie</td>
-            <td>0</td>
-            <td>1</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-            <td>0</td>
-        </tr>
-    </table>
+    <h3>Analysis</h3>
+    <img src="RE1.PNG" alt="Image 1" width="403" height="303">
+    <br><p> After opening the file in IDA, I noticed a functions section so decided to have a look through to see if any of the functions could be responsible for decryption. I found a function called decrypt_flag which I decided to investigate further.</p><br>
+    <img src="20250106_203811000_iOS.JPG" alt="Image 1" width="403" height="303">
+    <img src="20250106_203922000_iOS.JPG" alt="Image 2" width="403" height="303">
+    <br><p>In order to find the flag, I first wanted to understand what was happening in decrypt_function. I decided to annotate the assembly code to the best of my understanding.</p><br>
+    <img src="20250106_204109000_iOS.JPG" alt="Image 3" width="403" height="303">
+    <br><p>The biggest clue for me was knowing the string value of the encrypted flag and knowing how to decrypt it, simply XOR each equivalent hexadecimal byte with the value 0x2A. While the assembly code also tells me the decrypted flag is stored in rcx+19, after having a look in IDA I struggled to find it this way. I therefore decided to write a python script to complete the decryption process for me.</p><br>
+    <img src="RE3.PNG" alt="Image 4" width="403" height="303">
+    <br><p>Above is my script, which gave the following output:</p><br>
+    <img src="RE4.PNG" alt="Image 4" width="403" height="303">
+    <br><p>This reveals that the final decrypted flag is <b>flag{hidden_in_xor_sight}</b></p><br>
+
+
 
 
 </body>
